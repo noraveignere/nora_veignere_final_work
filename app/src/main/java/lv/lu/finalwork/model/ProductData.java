@@ -6,6 +6,12 @@ public class ProductData {
     private final String name;
     private final String price;
 
+    public ProductData(String id, String name, String price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -25,11 +31,5 @@ public class ProductData {
 
     public String getPrice() {
         return price;
-    }
-
-    public ProductData(String id, String name, String price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
     }
 }

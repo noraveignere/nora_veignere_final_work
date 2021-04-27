@@ -4,17 +4,21 @@ import lv.lu.finalwork.model.Product;
 import lv.lu.finalwork.model.ProductCategory;
 import lv.lu.finalwork.model.ProductData;
 import lv.lu.finalwork.model.ProductInputData;
-import lv.lu.finalwork.repository.ProductRepository;
+import lv.lu.finalwork.repository.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ProductService {
 
-    private final ProductRepository repository;
+    private final Repository<Product> repository;
 
-    public ProductService(ProductRepository repository) {
+    @Autowired
+    public ProductService(Repository<Product> repository) {
         this.repository = repository;
     }
 
@@ -26,12 +30,12 @@ public class ProductService {
     public List<ProductData> findAll() {
         List<ProductData> result = new ArrayList<>();
         for (Product product : repository.findAll()) {
-            result.add(convertFrom(product));
+            result.add(covertFrom(product));
         }
         return result;
     }
 
-    private ProductData convertFrom(Product product) {
+    private ProductData covertFrom(Product product) {
         return new ProductData(
                 product.getId().toString(),
                 product.getName(),
@@ -50,9 +54,6 @@ public class ProductService {
             product.setDescription(productInputData.getDescription());
         }
         return product;
-
-
     }
-
 
 }

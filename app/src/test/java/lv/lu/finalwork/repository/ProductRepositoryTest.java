@@ -4,6 +4,7 @@ import lv.lu.finalwork.model.Product;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void shouldFindAllProduct() {
+    public void shouldFindAllProducts() {
         Product orange = new Product();
         orange.setId(1L);
         Product fish = new Product();
@@ -33,14 +34,13 @@ public class ProductRepositoryTest {
         repoMock.put(2L, fish);
 
         List<Product> result = victim.findAll();
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.contains(orange));
-        Assert.assertTrue(result.contains(fish));
-
+        assertNotNull(result);
+        assertTrue(result.contains(orange));
+        assertTrue(result.contains(fish));
     }
 
     @Test
-    public void shouldFindProductByID() {
+    public void shouldFindProductById() {
         Product orange = new Product();
         repoMock.put(1L, orange);
 
@@ -57,7 +57,6 @@ public class ProductRepositoryTest {
         assertEquals(productId, orange.getId());
         assertTrue(repoMock.containsKey(productId));
         assertEquals(orange, repoMock.get(productId));
-
     }
 
     @Test
@@ -65,6 +64,7 @@ public class ProductRepositoryTest {
         Product orange = new Product();
         orange.setId(1L);
         repoMock.put(1L, orange);
+
         victim.delete(1L);
 
         assertFalse(repoMock.containsKey(1L));
